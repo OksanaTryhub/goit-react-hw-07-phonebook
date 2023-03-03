@@ -1,1 +1,1 @@
-React Homework module 4 - React hooks - Phonebook
+React Homework module 7 - Asynchronous Redux - Phonebook
