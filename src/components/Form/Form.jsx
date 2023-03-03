@@ -9,7 +9,7 @@ import css from './Form.module.css';
 
 export default function Form({ onSubmit }) {
   const [name, setName] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
+  const [phone, setPhone] = useState('');
   const [warning, setWarning] = useState(false);
 
   const contacts = useSelector(getAllContacts);
@@ -24,8 +24,8 @@ export default function Form({ onSubmit }) {
         setName(value);
         break;
 
-      case 'phoneNumber':
-        setPhoneNumber(value);
+      case 'phone':
+        setPhone(value);
         break;
 
       default:
@@ -35,7 +35,7 @@ export default function Form({ onSubmit }) {
 
   const resetForm = () => {
     setName('');
-    setPhoneNumber('');
+    setPhone('');
   };
 
   const isDublicate = name => {
@@ -64,7 +64,7 @@ export default function Form({ onSubmit }) {
   const handleSubmit = e => {
     e.preventDefault();
 
-    onSubmit = handleAddContact({ name, phoneNumber });
+    onSubmit = handleAddContact({ name, phone });
   };
 
   return (
@@ -88,9 +88,9 @@ export default function Form({ onSubmit }) {
         <input
           className={css.contactForm__input}
           type="tel"
-          name="phoneNumber"
+          name="phone"
           autoComplete="off"
-          value={phoneNumber}
+          value={phone}
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required

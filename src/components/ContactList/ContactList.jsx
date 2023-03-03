@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { getAllContacts } from 'components/redux/contacts/contacts-selectors';
+import { getFilteredContacts } from 'components/redux/filter/filter-selectors';
+
 import {
   fetchAllContacts,
   fetchDeleteContact,
@@ -11,7 +12,7 @@ import SvgIcon from '../SvgIcon/SvgIcon';
 import css from './ContactList.module.css';
 
 export default function ContactList({ contacts, onDeleteContact }) {
-  const contactsList = useSelector(getAllContacts);
+  const filteredContacts = useSelector(getFilteredContacts);
 
   const dispatch = useDispatch();
 
@@ -25,7 +26,7 @@ export default function ContactList({ contacts, onDeleteContact }) {
 
   return (
     <ul className={css.contactList}>
-      {contactsList.items.map(({ id, name, phone }) => (
+      {filteredContacts.map(({ id, name, phone }) => (
         <li key={id} className={css.contactList__item}>
           <p className={css.contactList__name}>{name}: </p>
           <p className={css.contactList__number}>{phone}</p>
