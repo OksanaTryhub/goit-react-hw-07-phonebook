@@ -17,7 +17,7 @@ export default function ContactList({ contacts, onDeleteContact }) {
   // console.log(filteredContacts);
 
   const contactsList = useSelector(getAllContacts);
-  console.log(contactsList);
+  console.log(contactsList.items);
 
   const dispatch = useDispatch();
 

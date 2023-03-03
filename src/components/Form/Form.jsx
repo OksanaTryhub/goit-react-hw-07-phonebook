@@ -10,7 +10,7 @@ import css from './Form.module.css';
 
 export default function Form({ onSubmit }) {
   const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
   const [warning, setWarning] = useState(false);
 
   // const contacts = useSelector(getAllContacts);
@@ -25,8 +25,8 @@ export default function Form({ onSubmit }) {
         setName(value);
         break;
 
-      case 'number':
-        setNumber(value);
+      case 'phoneNumber':
+        setPhoneNumber(value);
         break;
 
       default:
@@ -36,27 +36,29 @@ export default function Form({ onSubmit }) {
 
   const resetForm = () => {
     setName('');
-    setNumber('');
+    setPhoneNumber('');
   };
 
   // const isDublicate = name => {
   //   const normalizedNewContactName = name.toLocaleLowerCase();
+  //   console.log(normalizedNewContactName);
+  //   console.log('contacts.items', contacts.items);
 
-  //   const result = contacts.find(({ name }) => {
+  //   const result = contacts.items.find(({ name }) => {
   //     return name.toLocaleLowerCase() === normalizedNewContactName;
   //   });
-
+  //   console.log('result', result);
   //   return Boolean(result);
   // };
 
-  const handleAddContact = ({ name, number }) => {
+  const handleAddContact = ({ name, phone }) => {
     // if (isDublicate(name)) {
     //   setWarning(true);
-    //   warningMessage(name);
 
+    //   warningMessage(name);
     //   return;
     // }
-    dispatch(fetchAddContact({ name, number }));
+    dispatch(fetchAddContact({ name, phone }));
     setWarning(false);
     resetForm();
     console.log(warning);
@@ -65,7 +67,7 @@ export default function Form({ onSubmit }) {
   const handleSubmit = e => {
     e.preventDefault();
 
-    onSubmit = handleAddContact({ name, number });
+    onSubmit = handleAddContact({ name, phoneNumber });
   };
 
   return (
@@ -89,9 +91,9 @@ export default function Form({ onSubmit }) {
         <input
           className={css.contactForm__input}
           type="tel"
-          name="number"
+          name="phoneNumber"
           autoComplete="off"
-          value={number}
+          value={phoneNumber}
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required

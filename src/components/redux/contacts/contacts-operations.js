@@ -16,27 +16,29 @@ export const fetchAllContacts = () => {
   return func;
 };
 
-const isDublicate = (contacts, { name }) => {
+const isDublicate = (contacts, name) => {
   const normalizedNewContactName = name.toLocaleLowerCase();
 
   const result = contacts.find(({ name }) => {
     return name.toLocaleLowerCase() === normalizedNewContactName;
   });
-
+  console.log('result', Boolean(result));
   return Boolean(result);
 };
 
-export const fetchAddContact = data => {
+export const fetchAddContact = ({ name, phone }) => {
   const func = async (dispatch, getState) => {
     try {
       const { contacts } = getState();
-      if (isDublicate(contacts.items, data.name)) {
-        warningMessage(data.name);
+      console.log('contacts.items', contacts.items);
+      if (isDublicate(contacts.items, name)) {
+        warningMessage(name);
+
         return false;
       }
-
       dispatch(actions.fetchAddContactLoading());
-      const result = await api.addContact(data);
+      const result = await api.addContact({ name, phone });
+      console.log(result);
       dispatch(actions.fetchAddContactSuccess(result));
     } catch ({ response }) {
       dispatch(actions.fetchAddContactError(response.data.message));
