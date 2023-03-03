@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
-import { addContact } from 'components/redux/contacts/contacts-slice';
-import { getAllContacts } from './../redux/contacts/contacts-selectors';
+import { fetchAddContact } from 'components/redux/contacts/contacts-operations';
+// import { addContact } from 'components/redux/contacts/contacts-slice';
+// import { getAllContacts } from './../redux/contacts/contacts-selectors';
 
-import warningMessage from 'utils/warningMessage';
+// import warningMessage from 'utils/warningMessage';
 import css from './Form.module.css';
 
 export default function Form({ onSubmit }) {
@@ -12,7 +13,7 @@ export default function Form({ onSubmit }) {
   const [number, setNumber] = useState('');
   const [warning, setWarning] = useState(false);
 
-  const contacts = useSelector(getAllContacts);
+  // const contacts = useSelector(getAllContacts);
 
   const dispatch = useDispatch();
 
@@ -38,25 +39,24 @@ export default function Form({ onSubmit }) {
     setNumber('');
   };
 
-  const isDublicate = name => {
-    const normalizedNewContactName = name.toLocaleLowerCase();
+  // const isDublicate = name => {
+  //   const normalizedNewContactName = name.toLocaleLowerCase();
 
-    const result = contacts.find(({ name }) => {
-      return name.toLocaleLowerCase() === normalizedNewContactName;
-    });
+  //   const result = contacts.find(({ name }) => {
+  //     return name.toLocaleLowerCase() === normalizedNewContactName;
+  //   });
 
-    return Boolean(result);
-  };
+  //   return Boolean(result);
+  // };
 
   const handleAddContact = ({ name, number }) => {
-    if (isDublicate(name)) {
-      setWarning(true);
-      warningMessage(name);
+    // if (isDublicate(name)) {
+    //   setWarning(true);
+    //   warningMessage(name);
 
-      return;
-    }
-    const action = addContact({ name, number });
-    dispatch(action);
+    //   return;
+    // }
+    dispatch(fetchAddContact({ name, number }));
     setWarning(false);
     resetForm();
     console.log(warning);
