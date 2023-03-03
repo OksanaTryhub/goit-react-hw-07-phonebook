@@ -49,16 +49,14 @@ export default function Form({ onSubmit }) {
   //   return Boolean(result);
   // };
 
-  const handleAddContact = ({ name, phone }) => {
+  const handleAddContact = ({ name, number }) => {
     // if (isDublicate(name)) {
     //   setWarning(true);
     //   warningMessage(name);
 
     //   return;
     // }
-    console.log('name', name)
-    console.log('phone', phone)
-    dispatch(fetchAddContact({ name, phone }));
+    dispatch(fetchAddContact({ name, number }));
     setWarning(false);
     resetForm();
     console.log(warning);
@@ -67,7 +65,7 @@ export default function Form({ onSubmit }) {
   const handleSubmit = e => {
     e.preventDefault();
 
-    onSubmit = handleAddContact({ name, phone });
+    onSubmit = handleAddContact({ name, number });
   };
 
   return (
