@@ -30,7 +30,6 @@ export const fetchAddContact = ({ name, phone }) => {
   const func = async (dispatch, getState) => {
     try {
       const { contacts } = getState();
-      console.log('contacts.items', contacts.items);
       if (isDublicate(contacts.items, name)) {
         warningMessage(name);
 
@@ -38,7 +37,6 @@ export const fetchAddContact = ({ name, phone }) => {
       }
       dispatch(actions.fetchAddContactLoading());
       const result = await api.addContact({ name, phone });
-      console.log(result);
       dispatch(actions.fetchAddContactSuccess(result));
     } catch ({ response }) {
       dispatch(actions.fetchAddContactError(response.data.message));

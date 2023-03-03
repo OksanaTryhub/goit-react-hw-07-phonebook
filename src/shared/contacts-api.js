@@ -6,13 +6,11 @@ const contactsInstance = axios.create({
 
 export const getContacts = async () => {
   const { data } = await contactsInstance.get('/');
-  console.log(data);
   return data;
 };
 
 export const addContact = async data => {
   const { data: result } = await contactsInstance.post('/', data);
-  // console.log('result', result);
   return result;
 };
 
