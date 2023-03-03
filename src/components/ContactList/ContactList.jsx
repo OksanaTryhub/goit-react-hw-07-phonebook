@@ -31,10 +31,10 @@ export default function ContactList({ contacts, onDeleteContact }) {
 
   return (
     <ul className={css.contactList}>
-      {contactsList.items.map(({ id, name, number }) => (
+      {contactsList.items.map(({ id, name, phone }) => (
         <li key={id} className={css.contactList__item}>
           <p className={css.contactList__name}>{name}: </p>
-          <p className={css.contactList__number}>{number}</p>
+          <p className={css.contactList__number}>{phone}</p>
           <button
             className={css.contactList__deleteBtn}
             onClick={() => handleDeleteContact(id)}
