@@ -1,13 +1,18 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { fetchAddContact } from 'components/redux/contacts/contacts-operations';
+import { getAllContacts } from './../redux/contacts/contacts-selectors';
 
+import warningMessage from 'utils/warningMessage';
 import css from './Form.module.css';
 
 export default function Form({ onSubmit }) {
   const [name, setName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
+  const [warning, setWarning] = useState(false);
+
+  const contacts = useSelector(getAllContacts);
 
   const dispatch = useDispatch();
 
@@ -33,9 +38,27 @@ export default function Form({ onSubmit }) {
     setPhoneNumber('');
   };
 
+  const isDublicate = name => {
+    const normalizedNewContactName = name.toLocaleLowerCase();
+
+    const result = contacts.items.find(({ name }) => {
+      return name.toLocaleLowerCase() === normalizedNewContactName;
+    });
+
+    return Boolean(result);
+  };
+
   const handleAddContact = ({ name, phone }) => {
+    if (isDublicate(name)) {
+      setWarning(true);
+
+      warningMessage(name);
+      return;
+    }
     dispatch(fetchAddContact({ name, phone }));
+    setWarning(false);
     resetForm();
+    console.log(warning);
   };
 
   const handleSubmit = e => {
