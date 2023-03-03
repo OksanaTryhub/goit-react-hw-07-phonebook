@@ -58,7 +58,7 @@ export default function Form({ onSubmit }) {
     dispatch(fetchAddContact({ name, phone }));
     setWarning(false);
     resetForm();
-    console.log(warning);
+    // console.log(warning);
   };
 
   const handleSubmit = e => {
