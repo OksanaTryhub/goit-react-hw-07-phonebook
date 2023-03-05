@@ -11,7 +11,7 @@ import {
 import SvgIcon from '../SvgIcon/SvgIcon';
 import css from './ContactList.module.css';
 
-export default function ContactList({ contacts, onDeleteContact }) {
+export default function ContactList() {
   const filteredContacts = useSelector(getFilteredContacts);
 
   const dispatch = useDispatch();
