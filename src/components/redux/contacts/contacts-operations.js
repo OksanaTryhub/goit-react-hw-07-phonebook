@@ -31,7 +31,6 @@ export const fetchDeleteContact = createAsyncThunk(
   async (id, thunkAPI) => {
     try {
       await api.deleteContact(id);
-      console.log('delete', id);
       return id;
     } catch ({ response }) {
       return thunkAPI.rejectWithValue(response.data.message);
